@@ -1,59 +1,93 @@
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.p5 {
+    padding: 5px;
+}
+
+.m4 {
+    margin-top: 4px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .sidepane {
-  height: 100%;
-  background: #E8E8EA;
+    height: 100%;
+    background: #E8E8EA;
 }
 
 .sidepane .form {
-  height: 80px;
-  margin: 10px 0;
+    height: 80px;
+    margin: 10px 0;
 }
 
 .sidepane .assets {
-  width: 100%;
+    width: 100%;
 }
 
 #assetText {
-  font-size: 24px;
+    font-size: 24px;
 }
 
-.assets .text, .assets .image {
-  margin: 10px 0;
+.assets .text,
+.assets .image {
+    margin: 10px 0;
 }
+
 .assets .image ul li {
-  width: 50px;
-  height: 50px;
-  margin-right: 5px;
-  float: left;
-  overflow: hidden;
-}
-.assets .image ul li img {
-  width: 100%;
-  height: 100%;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+    float: left;
+    overflow: hidden;
 }
 
-.canvas .block {
-  position: relative;
-  width: 600px; height: 600px;
-  margin: 10px;
-  border: 1px solid;
-  box-shadow: 0px 0px 5px black;
+.assets .image ul li img {
+    width: 100%;
+    height: 100%;
+}
+
+canv .block {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    margin: 10px;
+    border: 1px solid;
+    box-shadow: 0px 0px 5px black;
 }
 
 .item {
-  border: 1px solid transparent;
-  position: absolute;
+    border: 1px solid transparent;
+    position: absolute;
 }
 
 .item.selected {
-  border-color: blue;
+    border-color: blue;
+}
+
+.openfile-group {
+    position: relative;
+}
+
+.openfile-group input {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    max-width: 112px;
+    z-index: 111;
+    cursor: pointer!important;
+    padding: 5px;
+}
+
+.openfile-group button {
+    position: relative;
+    cursor: none!important;
 }

@@ -7,14 +7,22 @@
             <h3>Assets</h3>
             <div class="text">
                 <h4>Text</h4>
-                <button id="addText" class="btn btn-default">Add Text</button>
+
+                <div class="input-group">
+                    <input ng-model="main.addText" type="text" class="form-control" aria-label="...">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="main.addToText()">Add</button>
+                    </div>
+                    <!-- /btn-group -->
+                </div>
+                <!-- /input-group -->
             </div>
             <div class="image">
                 <h4>Images</h4>
 
                 <ul class="list-unstyled" ng-repeat="image in main.images track by $index">
                     <li>
-                        <a href="#" class="thumbnail">
+                        <a href="#" class="thumbnail" ng-click="main.addToImage(image)">
                             <img src="{{image}}" class="img-rounded">
                         </a>
                     </li>
@@ -28,5 +36,5 @@
     </div>
 
     <!-- canvas -->
-    <canv></canv>
+    <canv mydata='main.user' class="col-sm-10 col-md-10 col-lg-10 block"></canv>
 </div>

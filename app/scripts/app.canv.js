@@ -10,30 +10,47 @@
 
     function component() {
 
-        function componentController() {
+        componentController['$inject'] = ['$timeout']
 
-            this.myTest = 'hello test';
+        function componentController(timeout) {
+            this.tempUser = null;
 
-            console.log('canvs loaded?')
+            timeout(() => {
+                this.tempUser = this.mydata
+            })
 
         }
 
         return {
-            bindings: {},
+            bindings: {
+                mydata: '='
+            },
             template: TEMPLATE(),
             controller: componentController,
             controllerAs: 'vm'
         }
     }
 
-
     function TEMPLATE() {
         return TEMPLATE = `
-            <div class="canvas col-sm-8 col-md-8 col-lg-8">
                 <div class="block">
-                {{vm.myTest}}
-                    <!-- Add images and texts to here -->
-                </div>
-            </div>`;
+                      <div class="row">
+                            <div ng-repeat="item in vm.tempUser.images track by $index" 
+                            class="col-xs-2 col-md-2" ng-show="item.src.length>0">
+                            <div class="inner-w p5" >
+                                    <a href="#" class="thumbnail">
+                                    <img ng-src="{{item.src}}" ng-if="item.src.length>0" />                       
+                                    </a>
+                                </div>
+                            </div>
+                       </div> 
+                       <div class="row">
+                       <div ng-repeat="item in vm.tempUser.text track by $index" class="col-xs-2 col-md-2" >
+                           <div class="alert alert-info">
+                                <strong>{{item.name}}</strong>
+                            </div>
+                       </div>
+                    
+                </div>`;
     }
 })();
