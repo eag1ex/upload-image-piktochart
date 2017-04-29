@@ -31,6 +31,7 @@ body {
 
 .sidepane .assets {
     width: 100%;
+    display: inline-block;
 }
 
 #assetText {
@@ -77,6 +78,15 @@ canv .block {
     position: relative;
 }
 
+.openfile-group #preload-icon {
+    background: url('gif-load.gif') no-repeat center center;
+    width: 31px;
+    height: 31px;
+    display: block;
+    float: right;
+    margin-right: 50px;
+}
+
 .openfile-group input {
     opacity: 0;
     position: absolute;
@@ -90,4 +100,22 @@ canv .block {
 .openfile-group button {
     position: relative;
     cursor: none!important;
+}
+
+.canvas-image-item a,
+.canvas-text-item a {
+    margin-bottom: 0px;
+    cursor: move!important;
+}
+
+li.dndPlaceholder {}
+
+.canvas-image-item,
+.canvas-text-item {
+    cursor: move;
+}
+
+.canvas-image-item.dndDragging,
+.canvas-text-item.dndDragging {
+    border: 1px solid rgba(0, 0, 0, 0.3)!important;
 }

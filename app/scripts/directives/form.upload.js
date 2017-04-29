@@ -9,7 +9,7 @@
     function directive(API, DATA, timeout) {
 
         function directiveController() {
-            this.dbUpdated = false;
+
             console.log('directive loaded?')
         }
 
@@ -17,23 +17,15 @@
             el.bind('change', (event) => {
                 var file = event.target.files[0];
                 scope.file = file ? file : undefined;
-                console.log('file?', file)
                 scope.$apply();
             });
-            timeout(() => {
-                console.log('scope.$parent', scope.$parent)
-            }, 100)
-
-
             this.updateDB = () => {
-
                 scope.$emit("updateDB", { data: true });
-
             }
-
-
+            scope.fileLoading = false;
 
             scope.uploadFile = () => {
+                scope.fileLoading = true;
                 var fileForm = el[0].firstChild;
                 $.ajax({
                     url: API.UPLOADS,
@@ -46,6 +38,7 @@
                         console.log('success', data)
                         this.updateDB();
                         scope.file = '';
+                        scope.fileLoading = false;
                         return false;
                     },
                     error: (xhr, ajaxOptions, thrownError) => {
@@ -78,12 +71,13 @@
 
     function TEMPLATE() {
 
-        return `<form id="fileForm" name="form" method="post" ng-submit='uploadFile(file)'>
+        return `<form id="fileForm" name="form" method="post" ng-submit='uploadFile(file);'>
             <h3>Form</h3>
               <div class="openfile-group">
               <input ng-model="file" name="upload" type="file" accept="image/*" 
               class=" float-left btn btn-danger btn-md" />
               <button type="submit" class="btn btn-danger btn-md">Choose file</button>
+              <span id="preload-icon"ng-show="fileLoading==true"></span>
               </div>
              <p class="bg-success" ng-show="file.toString().length>0">{{file.name}}</p> 
             <button ng-show="file.toString().length>0" type="submit" class="btn btn-primary btn-md">Upload</button>

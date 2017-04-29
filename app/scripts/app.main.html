@@ -11,7 +11,7 @@
                 <div class="input-group">
                     <input ng-model="main.addText" type="text" class="form-control" aria-label="...">
                     <div class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="main.addToText()">Add</button>
+                        <button type="button" class="btn btn-default" ng-mousedown="main.addToText()">Add</button>
                     </div>
                     <!-- /btn-group -->
                 </div>
@@ -20,10 +20,10 @@
             <div class="image">
                 <h4>Images</h4>
 
-                <ul class="list-unstyled" ng-repeat="image in main.images track by $index">
-                    <li>
+                <ul class="list-unstyled">
+                    <li ng-repeat="image in main.images track by $index">
                         <a href="#" class="thumbnail" ng-click="main.addToImage(image)">
-                            <img src="{{image}}" class="img-rounded">
+                            <img ng-src="{{image}}" class="img-rounded">
                         </a>
                     </li>
 

@@ -1,0 +1,22 @@
+<div class="block">
+
+    <div class="row" dnd-list="vm.tempImages">
+        <div ng-repeat="item in vm.tempImages" class="col-xs-2 col-md-2 canvas-image-item" ng-show="item.src.length>0" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="vm.tempImages.splice($index, 1)">
+
+
+            <div class="inner-w p5">
+                <a href="#" class="thumbnail">
+                                    <img ng-src="{{item.src}}" ng-if="item.src.length>0" />                       
+                                    </a>
+            </div>
+        </div>
+    </div>
+    <div class="row" class="canvas-text" dnd-list="vm.tempText">
+        <div ng-repeat="item in vm.tempText" class="col-xs-2 col-md-2 canvas-text-item" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="vm.tempText.splice($index, 1)" ng-show="item.name.length>0">
+            <div class="alert alert-info">
+                <strong>{{item.name}}</strong>
+            </div>
+        </div>
+
+    </div>
+</div>

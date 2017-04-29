@@ -5,32 +5,37 @@
         .module('app.layout')
         .controller('LayoutController', LayoutController);
 
-    LayoutController['$inject'] = ['DATA', '$scope'];
+    LayoutController['$inject'] = ['DATA', '$scope', '$timeout'];
 
-    function LayoutController(DATA, scope) {
+    function LayoutController(DATA, scope, timeout) {
 
-        this.dataOn = function() {
-            DATA.get().then((data) => {
-                this.images = data.images;
-                this.user = data.user;
-            })
-        }
 
-        this.dataOn();
+        DATA.get().then((data) => {
+            this.images = data.images;
+            this.user = data.user;
+        })
 
+
+        /**
+         * waiting for directive "formUpload" to upload image
+         * then we refresh the data from server
+         */
         scope.$on("updateDB", (evt, data) => {
             console.log('data changed!');
-            this.dataOn();
+            DATA.get().then((data) => {
+                this.images = data.images;
+            })
         });
 
 
         this.addToImage = function(img) {
+
             if (!img) return;
             var hasImage = false;
             angular.forEach(this.user.images, (value, key) => {
 
                 if (value.src == img) {
-                    //   console.log('has image!')
+                    console.log('has image!')
                     hasImage = true;
                     return;
                 }
@@ -38,13 +43,11 @@
             if (!hasImage) this.user.images.unshift({ src: img });
         }
 
-        this.addToText = function() {
-            // console.log('this.user.text', this.user.text)
-            if (!this.addText) return;
+        this.addToText = () => {
+            if (!this.addText) return false;
             var hasText = false;
             angular.forEach(this.user.text, (value, key) => {
-                if (value.name == this.addText) {
-                    //  console.log('has text!')
+                if (value.name === this.addText) {
                     hasText = true;
                     return;
                 }
