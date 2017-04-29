@@ -9,7 +9,6 @@
     function directive(API, DATA, timeout) {
 
         function directiveController() {
-
             console.log('directive loaded?')
         }
 
@@ -48,10 +47,7 @@
                     }
                 });
                 return false;
-
             }
-
-
 
         }
 
@@ -64,7 +60,6 @@
             template: TEMPLATE(),
             controllerAs: 'vm',
             restrict: 'E',
-
 
         }
     }

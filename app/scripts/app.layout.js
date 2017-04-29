@@ -5,15 +5,23 @@
         .module('app.layout')
         .controller('LayoutController', LayoutController);
 
-    LayoutController['$inject'] = ['DATA', '$scope', '$timeout'];
+    LayoutController['$inject'] = ['DATA', '$scope', '$timeout', 'mylocalStorage'];
 
-    function LayoutController(DATA, scope, timeout) {
-
+    function LayoutController(DATA, scope, timeout, mylocalStorage) {
+        var s = scope;
+        console.log('mylocalStorage', mylocalStorage);
 
         DATA.get().then((data) => {
-            this.images = data.images;
-            this.user = data.user;
+            s.images = data.images;
+            s.user = data.user;
         })
+
+        //// WATCH FOR DATA CHANGES AND UPDATE LOCAL STORAGE
+        scope.$watch('user', (newVal, oldVal) => {
+            console.log('newVal, oldVal', newVal, oldVal);
+            //mylocalStorage.set(userID, user);
+        }, true);
+
 
 
         /**
@@ -23,16 +31,15 @@
         scope.$on("updateDB", (evt, data) => {
             console.log('data changed!');
             DATA.get().then((data) => {
-                this.images = data.images;
+                s.images = data.images;
             })
         });
 
 
         this.addToImage = function(img) {
-
             if (!img) return;
             var hasImage = false;
-            angular.forEach(this.user.images, (value, key) => {
+            angular.forEach(s.user.images, (value, key) => {
 
                 if (value.src == img) {
                     console.log('has image!')
@@ -40,20 +47,22 @@
                     return;
                 }
             });
-            if (!hasImage) this.user.images.unshift({ src: img });
+            if (!hasImage) {
+                s.user.images.unshift({ src: img });
+            }
         }
 
         this.addToText = () => {
             if (!this.addText) return false;
             var hasText = false;
-            angular.forEach(this.user.text, (value, key) => {
+            angular.forEach(s.user.text, (value, key) => {
                 if (value.name === this.addText) {
                     hasText = true;
                     return;
                 }
             });
             if (!hasText) {
-                this.user.text.unshift({ name: this.addText });
+                s.user.text.unshift({ name: this.addText });
                 this.addText = '';
             }
         }

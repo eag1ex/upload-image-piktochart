@@ -21,7 +21,7 @@
                 <h4>Images</h4>
 
                 <ul class="list-unstyled">
-                    <li ng-repeat="image in main.images track by $index">
+                    <li ng-repeat="image in images track by $index">
                         <a href="#" class="thumbnail" ng-click="main.addToImage(image)">
                             <img ng-src="{{image}}" class="img-rounded">
                         </a>
@@ -36,5 +36,5 @@
     </div>
 
     <!-- canvas -->
-    <canv mydata='main.user' class="col-sm-10 col-md-10 col-lg-10 block"></canv>
+    <canv mydata='user' class="col-sm-10 col-md-10 col-lg-10 block"></canv>
 </div>

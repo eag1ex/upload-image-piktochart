@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" ng-strict-di>
 
 <head>
     <title>Canvas</title>
@@ -21,12 +21,12 @@
 
     <!--lib-->
     <script src="./app/scripts/app.js"></script>
-    <script src="./app/scripts/app.data.js"></script>
+    <script src="./app/scripts/data.services/app.localStorage.js"></script>
+    <script src="./app/scripts/data.services/app.data.js"></script>
     <script src="./app/scripts/app.core.js"></script>
     <script src="./app/scripts/app.layout.js"></script>
     <script src="./app/scripts/app.canv.js"></script>
     <script src="./app/scripts/directives/form.upload.js"></script>
-
 
 </body>
 

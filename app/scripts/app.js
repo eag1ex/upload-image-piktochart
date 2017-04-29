@@ -6,6 +6,7 @@
         'dndLists',
         'app.layout',
         'app.data',
+        'app.localStorage',
         'app.file',
         'app.canv'
     ]);

@@ -7,6 +7,7 @@
         .config(configureStates)
         .run(appRun)
         .constant('API', { 'UPLOADS': 'http://localhost:8000/uploads', 'IMAGES': 'http://localhost:8000/images' })
+        .constant('localstorage', window.localStorage);
 
     appRun['$inject'] = ['$rootScope'];
 
