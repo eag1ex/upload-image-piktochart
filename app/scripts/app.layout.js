@@ -5,10 +5,17 @@
         .module('app.layout')
         .controller('LayoutController', LayoutController);
 
-    // LayoutController.inject = ['dependency1'];
-    function LayoutController() {
+    LayoutController['$inject'] = ['DATA'];
+
+    function LayoutController(DATA) {
         var vm = this;
-        console.log('LayoutController')
+        console.log('data', DATA.get())
+        DATA.get().then((data) => {
+            console.log('data1', data)
+            this.images = data;
+        })
+
+        this.test = '??????'
 
     }
 })();

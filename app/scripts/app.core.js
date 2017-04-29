@@ -6,6 +6,7 @@
         .module('app.core')
         .config(configureStates)
         .run(appRun)
+        .constant('API', { 'UPLOADS': 'http://localhost:8000/uploads', 'IMAGES': 'http://localhost:8000/images' })
 
     appRun['$inject'] = ['$rootScope'];
 
@@ -36,8 +37,6 @@
             config: {
                 url: '/',
                 templateUrl: './app/scripts/app.layout.html',
-                controler: 'LayoutController',
-                controllerAs: 'vm',
                 title: 'main'
             }
         }];

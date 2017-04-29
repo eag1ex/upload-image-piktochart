@@ -1,29 +1,4 @@
 <!-- main -->
-<div class="container-fluid">
-
-    <div class="sidepane col-sm-2 col-md-2 col-lg-2">
-        <div class="form">
-            <h3>Form</h3>
-            <input type="file" class="form-control" placeholder="Upload Your Images" name="upload">
-            <button id="submit" class="btn btn-default">upload</button>
-            <!-- Upload Form here -->
-        </div>
-        <hr>
-        <div class="assets">
-            <h3>Assets</h3>
-            <div class="text">
-                <h4>Text</h4>
-                <button id="addText" class="btn btn-default">Add Text</button>
-            </div>
-            <div class="image">
-                <h4>Images</h4>
-                <ul class="list-unstyled">
-                    <!-- List of images here -->
-                    <!-- <li><img src="images/sample.jpeg" class="img-rounded" /></li> -->
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- canvas -->
-    <canv></canv>
+<div class="container-fluid" ng-controller="LayoutController as main">
+    <div ng-include="'./app/scripts/app.main.html'"></div>
 </div>

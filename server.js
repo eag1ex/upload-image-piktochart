@@ -5,10 +5,26 @@ const multer = require('multer');
 const fs = require('fs');
 const junk = require('junk');
 let app = express();
+var bodyParser = require('body-parser');
 
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./'));
 app.use(express.static('./app/**'));
 app.use(express.static('./app/**/**'));
+
+
+app.use(function(req, res, next) {
+    //set headers to allow cross origin request.
+    //res.header("Content-Type", "multipart/form-data");
+    //res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
+
 
 // define file name and destination to save
 let storage = multer.diskStorage({
@@ -21,6 +37,8 @@ let storage = multer.diskStorage({
         cb(null, 'uploads-' + Date.now() + '.' + ext);
     }
 });
+
+
 
 // define what file type to accept
 let filter = (req, file, cb) => {
@@ -37,22 +55,28 @@ let upload = multer({
     fileFilter: filter
 }).single('upload');
 
+
 /* ===============================
   ROUTE
  ============================== */
 
 // route for file upload
+
 app.post('/uploads', (req, res) => {
-    upload(req, res, err => {
+    console.log('log!!!', req)
+
+    upload(req, res, (err) => {
         if (err) {
-            console.log(err)
-            res.status(400).json({ message: err });
-        } else {
-            res.status(200).json({
-                file: req.protocol + '://' + req.get('host') + '/images/' + req.file.filename
-            })
+            return res.end("Error uploading file.");
         }
-    })
+
+        res.status(200).json({
+            file: req.protocol + '://' + req.get('host') + '/images/' + req
+        })
+        console.log('file uploaded!', req)
+    });
+
+
 })
 
 app.get('/images', (req, res) => {
