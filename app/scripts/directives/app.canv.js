@@ -16,15 +16,22 @@
 
     function component() {
 
-        componentController['$inject'] = ['$timeout']
+        componentController['$inject'] = ['$timeout', ]
 
         function componentController(timeout) {
             this.tempUser = null;
             this.tempImages = null;
-            timeout(() => {
-                this.tempText = this.mydata.text
-                this.tempImages = this.mydata.images
-            })
+            this.mydata = null;
+
+            this.$onChanges = function(changes) {
+                if (angular.isUndefined(changes.mydata.previousValue) &&
+                    angular.isDefined(changes.mydata.currentValue)) {
+                    this.mydata = changes.mydata.currentValue;
+                    this.tempText = this.mydata.text
+                    this.tempImages = this.mydata.images
+                }
+            }
+
 
             this.removeText = (i) => {
                 if (typeof(i) !== 'number') return;
@@ -39,7 +46,7 @@
 
         return {
             bindings: {
-                mydata: '='
+                mydata: '<'
             },
             templateUrl: "./app/scripts/directives/app.canv.html",
             controller: componentController,

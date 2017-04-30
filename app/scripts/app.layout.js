@@ -29,7 +29,6 @@
         DATA.get().then((data) => {
             s.images = data.images;
             s.user = data.user;
-            console.log('user data', s.user)
         })
 
         scope.$on("$viewContentLoaded", function() {
