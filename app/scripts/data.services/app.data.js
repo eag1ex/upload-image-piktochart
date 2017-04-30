@@ -10,7 +10,6 @@
 
     function Service($http, $q, API, mylocalStorage) {
 
-        var userID = 0;
         this.get = function() {
 
             return $q.all([this.images(), this.user()]).then((result) => {
@@ -22,23 +21,20 @@
 
         }
         this.user = function() {
-            return cleanNew();
+
             ////////////////////////////////////     
             /// LOCAL DATA
-            /*
-            var localData = mylocalStorage.get(userID);
-            console.log('localData', localData)
-            if (localData) {
-                return localData.then((response) => {
-                    console.log('running localdata', response)
-                    return response.data;
+            var localData = mylocalStorage.get();
+
+            if (localData !== null) {
+                return localData.then((data) => {
+                    return data;
                 }, (error) => {
                     return cleanNew();
                 })
             }
-            */
-
             ////////////////////////////////////
+
             function cleanNew() {
                 var user = {
                     id: 0,
@@ -48,10 +44,15 @@
                 var deferred = $q.defer();
 
                 if (user) {
-                    /// AQUIRE LOCAL DATA
-                    mylocalStorage.set(userID, user);
+                    /// SET LOCAL STORAGE
+                    mylocalStorage.set(user);
+
+                    console.info('running clean from DB');
                     deferred.resolve(user);
-                } else deferred.reject('error data not found');
+
+                } else {
+                    deferred.reject('error data not found');
+                }
                 return deferred.promise;
             }
         }

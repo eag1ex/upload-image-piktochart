@@ -5,11 +5,14 @@
         .module('app.layout')
         .controller('LayoutController', LayoutController);
 
-    LayoutController['$inject'] = ['DATA', '$scope', '$timeout', 'mylocalStorage'];
+    LayoutController['$inject'] = ['DATA', '$scope', '$timeout', 'mylocalStorage', '$rootScope'];
 
     function LayoutController(DATA, scope, timeout, mylocalStorage) {
         var s = scope;
-        console.log('mylocalStorage', mylocalStorage);
+
+        ///////////////////////////////////////
+        /// reset/clear cache
+        mylocalStorage.clearAll();
 
         DATA.get().then((data) => {
             s.images = data.images;
@@ -18,8 +21,10 @@
 
         //// WATCH FOR DATA CHANGES AND UPDATE LOCAL STORAGE
         scope.$watch('user', (newVal, oldVal) => {
-            console.log('newVal, oldVal', newVal, oldVal);
-            //mylocalStorage.set(userID, user);
+            if (typeof(newVal) !== 'undefined' && typeof(newVal) !== null) {
+                console.info('updated cache!');
+                mylocalStorage.set(newVal);
+            }
         }, true);
 
 
@@ -29,9 +34,10 @@
          * then we refresh the data from server
          */
         scope.$on("updateDB", (evt, data) => {
-            console.log('data changed!');
+
             DATA.get().then((data) => {
                 s.images = data.images;
+                console.info('updated model data!');
             })
         });
 
@@ -42,7 +48,6 @@
             angular.forEach(s.user.images, (value, key) => {
 
                 if (value.src == img) {
-                    console.log('has image!')
                     hasImage = true;
                     return;
                 }
@@ -66,7 +71,6 @@
                 this.addText = '';
             }
         }
-
 
     }
 })();

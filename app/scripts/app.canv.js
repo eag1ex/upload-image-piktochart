@@ -15,9 +15,9 @@
         function componentController(timeout) {
             this.tempUser = null;
             this.tempImages = null;
+            this.allowedDataImage = ['src'];
 
             timeout(() => {
-                console.log('this.mydata.user', this.mydata)
                 this.tempText = this.mydata.text
                 this.tempImages = this.mydata.images
             })

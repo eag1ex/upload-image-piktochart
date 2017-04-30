@@ -5,34 +5,36 @@
         .module('app.localStorage')
         .service('mylocalStorage', Service);
 
-    Service['$inject'] = ['localstorage', '$state', '$q'];
+    Service['$inject'] = ['localstorage', '$state', '$q', '$rootScope'];
 
-    function Service(localstorage, state, q) {
+    function Service(localstorage, state, q, rootScope) {
 
-        this.set = (key, data) => {
-            console.log('data saved!')
-            localstorage.setItem(key, JSON.stringify(data));
+        var userID = rootScope.userID || 'pictochart';
+
+        this.set = (data) => {
+            localstorage.setItem(userID, JSON.stringify(data));
         }
 
-        this.get = (key) => {
+        this.get = () => {
             var deferred = q.defer();
-            var localData = localstorage.getItem(key);
+            var localData = localstorage.getItem(userID);
 
-            if (localData !== null) {
-                console.log('got local data');
-                deferred.resolve(angular.fromJson(localData));
+            if (localData !== undefined && localData !== null) {
+                console.info('running localdata!')
+                deferred.resolve(JSON.parse(localData));
 
             } else {
-                deferred.reject('error data');
+                deferred.reject(null)
             }
             return deferred.promise;
         }
 
-        this.removeItem = (key) => {
-            localstorage.removeItem(key);
+        this.removeItem = () => {
+            localstorage.removeItem(userID);
         }
 
         this.clearAll = () => {
+            console.info('cleaned local data with clearAll() !')
             localstorage.clear()
         }
     }

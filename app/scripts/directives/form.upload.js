@@ -8,9 +8,7 @@
 
     function directive(API, DATA, timeout) {
 
-        function directiveController() {
-            console.log('directive loaded?')
-        }
+        function directiveController() {}
 
         function link(scope, el, attrs) {
             el.bind('change', (event) => {
@@ -34,7 +32,7 @@
                     cache: false,
                     processData: false,
                     success: (data) => {
-                        console.log('success', data)
+                        // console.log('success', data)
                         this.updateDB();
                         scope.file = '';
                         scope.fileLoading = false;
