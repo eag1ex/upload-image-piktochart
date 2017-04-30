@@ -1,95 +1,92 @@
-## Instructions
+#### - Pictochart Image editor -
+An image editor and text editor, you can upload image to the server and add them to the canvas,
+with drag and drop. 
 
-You are required to implement a single page application that allows user to add text and image into canvas.
-
-## Features
-
-Below are the basic features for the application:
-
-- user can see the existing images from folder `images` to the images list
-- user can *upload image* to folder `images` and directly added to images list
-- user can *add and remove image / text* from the menu to the canvas
-- user can *move the image / text* around the canvas
-
-Bonus points if you can provide this feature:
-
-- the created objects on canvas can be saved and repopulated on refresh browser
-
-## Resources
-
-You will be given a HTML and CSS file with simple structure, and a server that allows you to upload and retrieve image. Instruction on how to run the server is included below.
-
-## Requirements
-
-Here are the expected requirements:
-
-- App should have the features listed [above](#features)
-
-- App should work on modern browsers (Chrome / Firefox)
-
-- App logic and data flow are written in a functional and reactive way
-
-    Separate the logic between app state and view / user interactions (unidirectional data flow). 
-
-- Try to avoid using libraries as much as possible
-
-    If you need to use libraries, we recommend ReactJS, RxJS / xstream, CycleJS, and jQuery.
-
-    _note: use native HTML element `<div>` for editor canvas, not `<canvas>`_
-
-Bonus points given for these requirements:
-
-- Code and flow should be properly documented
-
-    Help us understand your flow easier by code comments or a readme file.
-
-- Build automated test for the app
-
-
-## How to Submit
-
-- Zip your working folder with the name `<your name>-piktojstest`
-
-- Exclude `node_modules` folder from the zip
-
-- If you're using github or any code management tools, you can pass us the link
-
-- You have **one day** to complete the test. If you are not able to finish, do send us whatever you have done, we will evaluate accordingly. If you need more time to fulfill all the features and requirements, we can give you **an extra day**
-
-Have fun programming 😊
-
-## How To Install
-
-To set up the environment dependencies ( node version 5++ )
-
+* Instructions file CLIENT.README.md
 ```
-$ npm install
+#!python
+
+$/ npm install 
 ```
 
-To run the node server
+***
+###### Start the App
 
 ```
-$ npm run start
+#!python
+
+  $/ npm run start
+```
+      
+***
+##### Stack/Setup
+* Angular 1.6/component, BootStrap 3, drag and drop, and window.storage witn express
+* All the files are documented.
+* Following John Papa Angular Styleguide
+* Integraded in modular fashion
+* Using $.AJAX to send form data for multer
+* Coded in OOP
+***
+
+##### File structure
+
+> **app**
+
+>> css
+
+>> images
+
+>> scripts
+
+>>> directives
+
+>>>> app.canv.html
+
+>>>> app.canv.js
+
+>>>> form.upload.js
+
+>>> data.services
+
+>>>> app.data.js
+
+>>>> app.localStorage.js
+
+>>> **app.layout.js**
+
+>>> app.layout.html
+
+>>> app.main.html
+
+>>> **app.core.js**
+
+>>> **app.js**
+
+>> index.html
+
+```
+#!python
+
+     /**
+       *  The logic of this app is:
+       *  Layout controller  <<< data || localstorage
+       *         > directives <<< data from parent
+       */
 ```
 
-Server is listening to port `8000`
+***
 
-### API
+##### -- Remarks --
+* Using $.AJAX for the form data submission
+* Using dragging plugin form movind items on canvas
+* executing $watches when data changes to save for localstorage.
+* Can add and remove items from canvas and menu.
+* Tested and works on Linux and Windows
+***
 
-#### get uploaded images
+###### To be completed ?
+* Images are not removed from the server on delete, i wasnt sure since there is no actual database...
 
-```
-GET /images
-```
+***
 
-#### upload image to server
-
-```
-POST /uploads
-```
-
-### Note
-
-_- The name of the file input has to be `upload` as this is what the server will be reading from_
-_- The server only accepts `png` and `jpeg` file format_
-_- You are allowed to edit the server.js file_
+##### Thank you
