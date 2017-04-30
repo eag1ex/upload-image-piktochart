@@ -6,6 +6,8 @@ const fs = require('fs');
 const junk = require('junk');
 let app = express();
 var bodyParser = require('body-parser');
+var port = app.set('port', process.env.PORT || 8000);
+var ejs = require('ejs');
 
 
 app.use(bodyParser.json());
@@ -14,6 +16,9 @@ app.use(express.static('./'));
 app.use(express.static('./app/**'));
 app.use(express.static('./app/**/**'));
 
+app.engine('html', ejs.renderFile);
+app.set('view engine', 'html');
+app.set('views', './app');
 
 app.use(function(req, res, next) {
     //set headers to allow cross origin request.
@@ -63,8 +68,6 @@ let upload = multer({
 // route for file upload
 
 app.post('/uploads', (req, res) => {
-    console.log('log!!!', req)
-
     upload(req, res, (err) => {
         if (err) {
             return res.end("Error uploading file.");
@@ -73,9 +76,7 @@ app.post('/uploads', (req, res) => {
         res.status(200).json({
             file: req.protocol + '://' + req.get('host') + '/images/' + req
         })
-        console.log('file uploaded!', req)
     });
-
 
 })
 
@@ -90,9 +91,11 @@ app.get('/images', (req, res) => {
 
 // general route
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/app/index.html');
+    res.render('index', {
+        API_MAIN: "http://localhost:" + app.get('port')
+    });
 })
 
-var server = app.listen(8000, _ => {
+var server = app.listen(app.get('port'), _ => {
     console.log('server started. listening to 8000');
 })

@@ -1,18 +1,23 @@
 (() => {
     'use strict';
     angular.module('app.core', []);
-
+    /** API_MAIN
+     * declared globaly 
+     */
     angular
         .module('app.core')
         .config(configureStates)
         .run(appRun)
         .filter('unique', uniqueFilter)
-        .constant('API', { 'UPLOADS': 'http://localhost:8000/uploads', 'IMAGES': 'http://localhost:8000/images' })
+        .constant('API', { 'UPLOADS': API_MAIN + '/uploads', 'IMAGES': API_MAIN + '/images' })
         .constant('localstorage', window.localStorage);
 
     appRun['$inject'] = ['$rootScope'];
 
     function appRun($rootScope) {
+        /**
+         * manually set our user for retreiving local data
+         */
         $rootScope.userID = 'pictochart';
 
         $rootScope.$on("$stateChangeSuccess", function() {

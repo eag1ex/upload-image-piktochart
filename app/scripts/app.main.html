@@ -21,8 +21,10 @@
                 <h4>Images</h4>
 
                 <ul class="list-unstyled">
-                    <li ng-repeat="image in images track by $index">
-                        <a href="#" class="thumbnail" ng-click="main.addToImage(image)">
+                    <li ng-repeat="image in images track by $index" class="image-item-box" ng-init="img.m=0;img.r=0 " ng-mouseover="img.m=1" ng-mouseleave="img.m=0">
+                        <a href="#" class="thumbnail" ng-click="img.r = main.addToImage(image);">
+                            <span class="add" ng-show='img.m==1 && img.r==0'></span>
+                            <span class="remove" ng-show='img.r==1 && img.m==1' ng-click="main.removeImage($index)"></span>
                             <img ng-src="{{image}}" class="img-rounded">
                         </a>
                     </li>

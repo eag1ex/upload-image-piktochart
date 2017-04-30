@@ -7,6 +7,19 @@
 
     Service['$inject'] = ['localstorage', '$state', '$q', '$rootScope'];
 
+    /**
+     * 
+     * @param {*} localstorage 
+     * @param {*} state 
+     * @param {*} q 
+     * @param {*} rootScope 
+     *  
+     * local storage > window.localstorage, no plugin
+     * this checks is new data is available via 'get' and 'set'
+     * it is integraded in app.data "DATA" service
+     * 
+     */
+
     function Service(localstorage, state, q, rootScope) {
 
         var userID = rootScope.userID || 'pictochart';
@@ -21,7 +34,7 @@
 
             if (localData !== undefined && localData !== null) {
                 console.info('running localdata!')
-                deferred.resolve(JSON.parse(localData));
+                deferred.resolve(angular.fromJson(localData));
 
             } else {
                 deferred.reject(null)
@@ -35,7 +48,8 @@
 
         this.clearAll = () => {
             console.info('cleaned local data with clearAll() !')
-            localstorage.clear()
+            localstorage.clear();
+            localstorage.clear();
         }
     }
 })();

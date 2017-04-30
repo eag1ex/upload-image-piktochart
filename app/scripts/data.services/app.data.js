@@ -8,6 +8,19 @@
 
     Service['$inject'] = ['$http', '$q', 'API', 'mylocalStorage'];
 
+    /**
+     * 
+     * @param {*} http 
+     * @param {*} q 
+     * @param {*} API 
+     * @param {*} mylocalStorage 
+     * 
+     *  using object data with local storage integraded 'mylocalStorage'
+     *  it checks for 'localData' user>localData, if not found it runs >user>cleanNew
+     * 
+     */
+
+
     function Service($http, $q, API, mylocalStorage) {
 
         this.get = function() {
@@ -38,8 +51,8 @@
             function cleanNew() {
                 var user = {
                     id: 0,
-                    images: [{ name: 'image', src: '' }],
-                    text: [{ name: 'some description' }]
+                    images: [{ id: 0, name: 'image', src: '' }],
+                    text: [{ id: 0, name: 'Pictochart, create text editor' }]
                 }
                 var deferred = $q.defer();
 
@@ -68,5 +81,4 @@
         }
 
     }
-
 })();

@@ -7,25 +7,44 @@
 
     LayoutController['$inject'] = ['DATA', '$scope', '$timeout', 'mylocalStorage', '$rootScope'];
 
+    /**
+     * @param {*} DATA 
+     * @param {*} scope 
+     * @param {*} timeout 
+     * @param {*} mylocalStorage 
+     * 
+     * data flow starts from this controller and gets distributed to  "canv" component/directive
+     * 
+     */
+
+
     function LayoutController(DATA, scope, timeout, mylocalStorage) {
         var s = scope;
 
         ///////////////////////////////////////
         /// reset/clear cache
-        mylocalStorage.clearAll();
+        //mylocalStorage.clearAll();
 
         DATA.get().then((data) => {
             s.images = data.images;
             s.user = data.user;
+            console.log('s.user', s.user)
+
         })
 
-        //// WATCH FOR DATA CHANGES AND UPDATE LOCAL STORAGE
-        scope.$watch('user', (newVal, oldVal) => {
-            if (typeof(newVal) !== 'undefined' && typeof(newVal) !== null) {
-                console.info('updated cache!');
-                mylocalStorage.set(newVal);
-            }
-        }, true);
+        scope.$on("$viewContentLoaded", function() {
+            //// WATCH FOR DATA CHANGES AND UPDATE LOCAL STORAGE
+            scope.$watch('user', (newVal, oldVal) => {
+                if (typeof(newVal) !== 'undefined' && typeof(newVal) !== null) {
+                    // delay cache update      
+                    timeout(() => {
+                        mylocalStorage.set(newVal);
+                        console.info('updated cache!');
+                    }, 500);
+                    //
+                }
+            }, true);
+        });
 
 
 
@@ -37,13 +56,14 @@
 
             DATA.get().then((data) => {
                 s.images = data.images;
+                mylocalStorage.set(s.user);
                 console.info('updated model data!');
             })
         });
 
 
         this.addToImage = function(img) {
-            if (!img) return;
+            if (!img) return false;
             var hasImage = false;
             angular.forEach(s.user.images, (value, key) => {
 
@@ -53,9 +73,18 @@
                 }
             });
             if (!hasImage) {
-                s.user.images.unshift({ src: img });
+                var newID = s.user.images.length;
+                s.user.images.unshift({ id: newID, src: img });
+
             }
+            return true;
         }
+
+        this.removeImage = function(i) {
+            if (typeof(i) !== 'number') return;
+            s.images.splice(i, 1);
+        }
+
 
         this.addToText = () => {
             if (!this.addText) return false;
@@ -67,7 +96,8 @@
                 }
             });
             if (!hasText) {
-                s.user.text.unshift({ name: this.addText });
+                var newID = s.user.text.length;
+                s.user.text.unshift({ id: newID, name: this.addText });
                 this.addText = '';
             }
         }

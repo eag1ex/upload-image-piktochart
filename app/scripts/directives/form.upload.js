@@ -5,6 +5,19 @@
     angular
         .module('app.file')
         .directive('formUpload', ['API', 'DATA', '$timeout', directive]);
+    /**
+     * 
+     * @param {*} API 
+     * @param {*} DATA 
+     * @param {*} timeout 
+     * 
+     * This directive uploads image to the server and send an $emit 
+     *  signal to the main controller to update scope
+     * 
+     * <form-upload></form-upload>
+     * scope.file >  we access file information for manipulation
+     */
+
 
     function directive(API, DATA, timeout) {
 
@@ -48,9 +61,6 @@
             }
 
         }
-
-
-
 
         return {
             controller: directiveController,

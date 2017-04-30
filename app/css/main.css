@@ -56,7 +56,19 @@ body {
     height: 100%;
 }
 
+
+/**
+CUSTOM ADDED STYLES ------------------------------------------------
+**/
+
+canv .text-block {
+    margin-top: 10px;
+}
+
+canv .image-block {}
+
 canv .block {
+    padding: 10px;
     position: relative;
     width: 100%;
     min-height: 600px;
@@ -79,7 +91,7 @@ canv .block {
 }
 
 .openfile-group #preload-icon {
-    background: url('gif-load.gif') no-repeat center center;
+    background: url('../images/gif-load.gif') no-repeat center center;
     width: 31px;
     height: 31px;
     display: block;
@@ -108,11 +120,65 @@ canv .block {
     cursor: move!important;
 }
 
-li.dndPlaceholder {}
+div[dnd-list] .dndPlaceholder {
+    display: block;
+}
+
+.dndPlaceholder>div {
+    margin: 5px;
+}
+
+.image-item-box {
+    position: relative;
+}
+
+span.add {
+    margin: 4px;
+    display: block;
+    background: url('../images/plus.png')no-repeat center center;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+}
+
+canv span.remove {
+    cursor: pointer;
+    top: 1px;
+    right: 13px;
+    margin: 4px;
+    display: block;
+    background: url('../images/delete.s.png')no-repeat center center;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+}
+
+span.remove {
+    margin: 4px;
+    display: block;
+    background: url('../images/delete.png')no-repeat center center;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+}
+
+div[dnd-list] .dndPlaceholder>div {
+    padding: 3px;
+}
+
+div[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+div[dnd-list] div.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
 
 .canvas-image-item,
 .canvas-text-item {
     cursor: move;
+    position: relative;
 }
 
 .canvas-image-item.dndDragging,
