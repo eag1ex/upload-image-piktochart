@@ -23,13 +23,13 @@
 
         ///////////////////////////////////////
         /// reset/clear cache
+        // in case of "Error: [ngRepeat:dupes]"  keep this uncommented.
         //mylocalStorage.clearAll();
 
         DATA.get().then((data) => {
             s.images = data.images;
             s.user = data.user;
-            console.log('s.user', s.user)
-
+            console.log('user data', s.user)
         })
 
         scope.$on("$viewContentLoaded", function() {

@@ -2,8 +2,8 @@
 
     <!-- image block -->
     <div class="row image-block" dnd-list="vm.tempImages" dnd-allowed-types="['src']" ng-init="imageItemSelected=null;">
-        <div ng-init="img.m=0" ng-repeat="item in vm.tempImages" class="col-xs-2 col-md-2 canvas-image-item" dnd-draggable="item" ng-if="item.src.length>0" dnd-type="'src'" dnd-effect-allowed="move" dnd-moved="vm.tempImages.splice($index, 1)" ng-mouseover="img.m=1"
-            ng-mouseleave="img.m=0">
+        <div ng-init="img.m=0" ng-repeat="item in vm.tempImages | unique: 'id' " class="col-xs-2 col-md-2 canvas-image-item" dnd-draggable="item" ng-if="item.src.length>0" dnd-type="'src'" dnd-effect-allowed="move" dnd-moved="vm.tempImages.splice($index, 1)"
+            ng-mouseover="img.m=1" ng-mouseleave="img.m=0">
             <div class="inner-w p5">
                 <span class="remove" ng-click="vm.removeImage($index)" ng-show="img.m==1"></span>
                 <a href="#" class="thumbnail">
@@ -21,8 +21,8 @@
 
     <!-- text block -->
     <div dnd-allowed-types="['text']" class="row canvas-text text-block" dnd-list="vm.tempText" ng-init="textItemSelected=null">
-        <div ng-init="img.m=0" ng-repeat="item in vm.tempText" class="col-xs-2 col-md-2 canvas-text-item" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="vm.tempText.splice($index, 1)" ng-show="item.name.length>0" ng-mouseover="img.m=1" ng-mouseleave="img.m=0"
-            dnd-type="'text'">
+        <div ng-init="img.m=0" ng-repeat="item in vm.tempText | unique: 'id' " class="col-xs-2 col-md-2 canvas-text-item" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="vm.tempText.splice($index, 1)" ng-show="item.name.length>0" ng-mouseover="img.m=1"
+            ng-mouseleave="img.m=0" dnd-type="'text'">
             <div class="alert alert-info">
                 <span class="remove" ng-click="vm.removeText($index)" ng-show="img.m==1"></span>
                 <strong>{{item.name}}</strong>

@@ -95,5 +95,6 @@ app.get('/', (req, res) => {
 })
 
 var server = app.listen(app.get('port'), _ => {
-    console.log('server started. listening to 8000');
+    console.log('server started. listening on http://localhost:' + app.get('port'));
+    console.log('Open Browser on http://localhost:' + app.get('port'));
 })

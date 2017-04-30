@@ -76,17 +76,23 @@ $/ npm install
 
 ***
 
+###### To be completed ?
+* Images are not removed from the server on delete, i wasnt sure since there is no actual database...
+* If you receive "Error: [ngRepeat:dupes]", disable local storage by uncommenting:
+*                             >app.layout.js > mylocalStorage.clearAll(); line 26.
+* This issue is still not completed.
+***
+
+
 ##### -- Remarks --
 * Using $.AJAX for the form data submission
 * Using dragNdrop plugin for moving items around canvas
 * Executing $watches when data changes, and save to localstorage.
 * Can add and remove items from canvas and menu (Not from server!)
+* to manually clear cache uncomment >app.layout.js > mylocalStorage.clearAll(); line 26.
 * Tested and works on Linux and Windows
 ***
 
-###### To be completed ?
-* Images are not removed from the server on delete, i wasnt sure since there is no actual database...
 
-***
 
 ##### Thank you
