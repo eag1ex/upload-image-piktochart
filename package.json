@@ -1,23 +1,23 @@
 {
-  "name": "create-editor",
-  "version": "0.0.1",
-  "description": "package for js candidate test",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
-  "author": "jun",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.13.4",
-    "jquery": "^2.2.3",
-    "junk": "^1.0.2",
-    "multer": "^1.1.0",
-    "nodemon": "^1.9.1"
-  },
-  "devDependencies": {
-    "body-parser": "^1.17.1",
-    "ejs": "^2.5.6",
-    "gulp": "^3.9.1"
-  }
+    "name": "create-editor",
+    "version": "0.0.2",
+    "description": "package for js candidate test",
+    "scripts": {
+        "postinstall": "bower install",
+        "start": "nodemon server.js"
+    },
+    "author": "Michael Polak",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.13.4",
+        "jquery": "^2.2.3",
+        "junk": "^1.0.2",
+        "multer": "^1.1.0",
+        "nodemon": "^1.9.1"
+    },
+    "devDependencies": {
+        "body-parser": "^1.17.1",
+        "ejs": "^2.5.6",
+        "gulp": "^3.9.1"
+    }
 }

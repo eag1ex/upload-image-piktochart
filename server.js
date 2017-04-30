@@ -21,10 +21,6 @@ app.set('view engine', 'html');
 app.set('views', './app');
 
 app.use(function(req, res, next) {
-    //set headers to allow cross origin request.
-    //res.header("Content-Type", "multipart/form-data");
-    //res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
@@ -42,7 +38,6 @@ let storage = multer.diskStorage({
         cb(null, 'uploads-' + Date.now() + '.' + ext);
     }
 });
-
 
 
 // define what file type to accept
@@ -92,6 +87,9 @@ app.get('/images', (req, res) => {
 // general route
 app.get('/', (req, res) => {
     res.render('index', {
+        /**
+         * render server address VAR in index.html
+         */
         API_MAIN: "http://localhost:" + app.get('port')
     });
 })
