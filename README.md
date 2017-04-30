@@ -78,9 +78,9 @@ $/ npm install
 
 ##### -- Remarks --
 * Using $.AJAX for the form data submission
-* Using dragging plugin form movind items on canvas
-* executing $watches when data changes to save for localstorage.
-* Can add and remove items from canvas and menu.
+* Using dragNdrop plugin for moving items around canvas
+* Executing $watches when data changes, and save to localstorage.
+* Can add and remove items from canvas and menu (Not from server!)
 * Tested and works on Linux and Windows
 ***
 
