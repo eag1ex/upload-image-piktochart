@@ -25,7 +25,9 @@
         var userID = rootScope.userID || 'pictochart';
 
         this.set = (data) => {
-            localstorage.setItem(userID, JSON.stringify(data));
+
+            var angularData = angular.copy(data); // this fixes Error: [ngRepeat:dupes]
+            localstorage.setItem(userID, JSON.stringify(angularData));
         }
 
         this.get = () => {

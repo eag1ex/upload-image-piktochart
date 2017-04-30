@@ -5,7 +5,7 @@
         .module('app.layout')
         .controller('LayoutController', LayoutController);
 
-    LayoutController['$inject'] = ['DATA', '$scope', '$timeout', 'mylocalStorage', '$rootScope'];
+    LayoutController['$inject'] = ['DATA', '$scope', '$timeout', 'mylocalStorage'];
 
     /**
      * @param {*} DATA 
@@ -35,7 +35,8 @@
             //// WATCH FOR DATA CHANGES AND UPDATE LOCAL STORAGE
             scope.$watch('user', (newVal, oldVal) => {
                 if (typeof(newVal) !== 'undefined' && typeof(newVal) !== null) {
-                    // delay cache update      
+                    // delay cache update
+                    s.user = newVal;
                     timeout(() => {
                         mylocalStorage.set(newVal);
                         console.info('updated cache!');

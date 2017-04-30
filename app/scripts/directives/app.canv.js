@@ -23,9 +23,8 @@
             this.tempImages = null;
             this.mydata = null;
 
-            this.$onChanges = function(changes) {
-                if (angular.isUndefined(changes.mydata.previousValue) &&
-                    angular.isDefined(changes.mydata.currentValue)) {
+            this.$onChanges = (changes) => {
+                if (angular.isDefined(changes.mydata.currentValue)) {
                     this.mydata = changes.mydata.currentValue;
                     this.tempText = this.mydata.text
                     this.tempImages = this.mydata.images
