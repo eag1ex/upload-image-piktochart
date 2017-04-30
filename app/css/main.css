@@ -96,7 +96,6 @@ canv .block {
     height: 31px;
     display: block;
     float: right;
-    margin-right: 50px;
 }
 
 .openfile-group input {

@@ -2,9 +2,11 @@
 An image editor and text editor, you can upload image to the server and add them to the canvas,
 with drag and drop. 
 
+
 * Instructions file CLIENT.README.md
 ```
 #!python
+you need npm and bower installed globally; Before npm install
 
 $/ npm install 
 ```
