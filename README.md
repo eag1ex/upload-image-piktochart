@@ -17,7 +17,7 @@ $/ npm install
 ```
 #!python
 
-  $/ npm run start
+  $/ npm start
 ```
       
 ***
